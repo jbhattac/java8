@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import com.joydeep.lamdas.vo.Person;
@@ -145,10 +146,16 @@ public class StreamJava8Demo {
 		
 		    numbers.stream()
 		   		   .filter(i->i%2==0)
-				   .map(i->i*2)
+		   		   .map(i->i*2)
 				   .sorted()
 				   .distinct()
 				   .forEach(System.out::println);
+		    
+		    int g =2;
+		  System.out.println("Joydeep "+numbers.stream(). 
+		    filter(i->i%g==0).count());
+		    
+		    
 		    
 		    /*
 		     * Infinite streams.
@@ -169,6 +176,7 @@ public class StreamJava8Demo {
 		    	 .mapToInt(i->i*2)
 		    	 .limit(n)
 		    	 .sum();
+		  
 		
 	}
 
