@@ -39,10 +39,10 @@ public class Java8Strings {
 	@Test
 	public void testRegChars() {
 		assertThat("bar:foobar", is(Pattern.compile(":")
-			    					   .splitAsStream("foobar:foo:bar")
-			                           .filter(s -> s.contains("bar"))
-			                           .sorted()
-			                           .collect(Collectors. 
+				    					   .splitAsStream("foobar:foo:bar")
+				                           .filter(s -> s.contains("bar"))
+				                           .sorted()
+				                           .collect(Collectors. 
 			                        		                joining(":"))));
 	}
 	
