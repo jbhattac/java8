@@ -34,7 +34,6 @@ logs
 .springBeans
 equalsApp.log
 dependency-reduced-pom.xml
-**/**/Test.java
 **/**/*.bck
 **/**/*.back
 data

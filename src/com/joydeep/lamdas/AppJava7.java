@@ -63,7 +63,7 @@ public class AppJava7 {
 
 	}
 
-	private static void printElements(List<Person> people, Conditional cond) {
+	private static void printElements(List<Person> people, Conditional  cond) {
 		for (Person person : people) {
 			if (cond.testCondition(person)) {
 				System.out.println(person);
