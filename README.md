@@ -20,4 +20,12 @@ Like the Marker Interface there existed the so called Functional Interfaces alre
 In java 8 single abstract method interface was described formally with @FunctionalInterface were formed and compiler will complain if contract is not maintained.
 
 In Java 8 java.util.function defines a host of functional interfaces for supporting a host of lambdas. 
+### Predicate
+	 Predicates are boolean-valued functions of one argument, they accept one argument and returns boolean.
+### Function
+	 Represents a function that accepts one argument and produces a result.  
+### Supplier
+	Do not  accept any argument but instead returns newly generated values.
+### Consumer
+	 Accepts a input and performs some operation on that input .
 
