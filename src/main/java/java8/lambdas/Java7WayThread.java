@@ -1,4 +1,4 @@
-package com.joydeep.lamdas;
+package java8.lambdas;
 
 /**
  * @author jbhattac

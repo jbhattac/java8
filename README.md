@@ -29,3 +29,75 @@ In Java 8 java.util.function defines a host of functional interfaces for support
 ### Consumer
 	 Accepts a input and performs some operation on that input .
 
+
+## Lambdas
+
+Lambdas are anonymous function it may or may not have parameters or results. This block of code is executed on demand or can be passed around. 
+
+### Anatomy of Lambdas
+
+If we take the anonymous class as the starting point , then firstly we remove the inner class declaration stuff. 
+
+	Thread t = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				System.out.println("From another thread ");
+			}
+
+		});
+		
+		Thread t = new Thread(
+
+			@Override
+			public void run() {
+				System.out.println("From another thread ");
+			}
+
+		);
+		
+Now let us analyse a function. Functions typically has 4 things 
+
+1. Name  -> This can be inferred with SAM interfaces being the definitions of lambdas so no need of the method name. 
+
+2. Body -> It is the most important part of the function as it describes purpose of the function .
+
+3. parameter list -> This is the operators on which the function acts . This is important and cannot be removed .
+
+4. return Type -> Need not be declared explicitly , can be inferred from the body of the function.
+
+If we keep the bare minimum part of this i.e. body and parameter list it is called the lambda expression.Lambda expression have a name and a parameter list.
+
+	Thread t = new Thread(
+		() -> System.out.println("From another thread ");
+		);
+		
+Are lambdas backward compatable.
+
+Lambda in java 8 are backward compatible i.e. we can use lambda even with old api.
+That is why they are backed by single abstract method interfaces which are named as Functional Interfaces. So lambda can be used with any old code like Runnable or callable etc , basically where there is a interface with a single abstract method.
+
+Is lambda a syntactical sugar i.e. the compiler changes the lambda to anonymous inner classes as in other languages.
+
+In java that is not true, lambda is implementated as invokedynamic in java which are function pointers. This can be found by using javap. So it consumes much less space in 
+memory and it is much faster.
+
+Java can predict the type of the elements passed by the collection types, so it allows 
+type inference, but only for lambda.
+
+() is optional in lambda expression but only for one parameter lambdas.
+
+lambdas should be of one lines,ogic should not be written in lambdas.
+
+How is the lambdas scope defined.
+
+Accessing outer scope variables from lambda expressions is  similar to anonymous classes. Access for final local variables and  instance and static variables from the  are allowed.
+
+Access for final variable in the local scope with read access. Implicit final variables are acceptable however the values should not alter.
+In constrast to local variables we have both read and write access to instance
+fields and static variables from within lambda expressions. 
+Default methods cannot be accessed from within lambda expressions.
+
+
+
+		
