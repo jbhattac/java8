@@ -98,6 +98,58 @@ In constrast to local variables we have both read and write access to instance
 fields and static variables from within lambda expressions. 
 Default methods cannot be accessed from within lambda expressions.
 
+## Method References
 
+Method references are short hand notation for lambdas that executes just ONE method and can replace lambdas in certain situations. So they can be called a subset of lambdas.
 
+The general syntax is System.out::println
+
+In a method reference, that contains the method before the :: operator and the name of the method after it without arguments.
+
+There are 4 types of method references
+
+1.  Static method reference , we can turn the following lambda to method reference
+
+		(args) -> Class.staticMethod(args)
 		
+		Class::staticMethod
+Instead of the . operator, we use the :: operator, and that we don't pass arguments to the method reference. In this case, any arguments (if any) taken by the method are passed automatically.Where ever we can pass a lambda expression that just calls a static method, we can use a method reference.
+
+2. Reference to an Instance Method of a Particular Object
+
+In this case, we have a lambda expression like 
+
+		(obj, args) -> obj.instanceMethod(args)
+		
+An instance of an object is passed, and one of its methods is executed with some optional(s) parameter(s).
+
+This can be turned into the following method reference
+
+		ObjectType::instanceMethod
+
+3. Instance method reference of an existing object
+
+In this case, we have a lambda expression like 
+
+	(args) -> obj.instanceMethod(args)
+
+This can be turned into the following method reference
+
+	obj::instanceMethod
+	
+an instance defined somewhere else is used, and the arguments (if any) are passed like static methods.
+
+4. Constructor method reference
+
+In this case, we have a lambda expression like the following
+
+	(args) -> new ClassName(args)
+
+That can be turned into the following method reference
+
+	ClassName::new
+
+The only thing this lambda expression does is to create a new object and we just reference a constructor of the class with the keyword new. Like in the other cases, arguments (if any) are not passed in the method reference.
+Most of the time, we can use this syntax with two (or three) interfaces of the java.util.function package.
+	
+	
