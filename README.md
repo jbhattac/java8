@@ -152,4 +152,16 @@ That can be turned into the following method reference
 The only thing this lambda expression does is to create a new object and we just reference a constructor of the class with the keyword new. Like in the other cases, arguments (if any) are not passed in the method reference.
 Most of the time, we can use this syntax with two (or three) interfaces of the java.util.function package.
 	
-	
+## Streams
+
+Streams are pipelines of transformations. A stream pipeline can be defined as a place 
+where several intermediate transformations takes place and at last there is this terminal operation that take place on data . But streams is in no way are place holders for data . Data is still stored in collections or arrays for example.Streams are lazy; computation on the source data is only performed when the terminal operation is initiated, and source elements are consumed only as needed. 
+
+In java 8 java.util.stream.Stream is the most interesting class that has been added to benefit streams. Let us have a peek into some of its features that it provides.
+
+
+1. filter(Predicate<? super T> predicate) -> Blocks some data of the stream and let others flow through. It returns a stream consisting of the elements of this stream that match the given predicate . So number of elements in the  output <= number of elements in input stream.Also note this is type of intermediate transformations that takes place in the stream pipeline.
+
+2.  map (Function<? super T,? extends R> mapper)-> Transforms values from one stream to other by applying the provided function , so the number of elements in the  output stream must match with the input. Also note this is type of intermediate transformations that takes place in the stream pipeline.
+
+
