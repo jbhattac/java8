@@ -39,6 +39,7 @@ public class StreamJava8Demo {
 		.filter(i->i%2==0)
 		.map(i->i*2)
 		.reduce(0,Integer::sum);
+		
 		/*
 		 * filter - Blocks some data and let others flow through. So no of output<= no of inputs.
 		 * Types of Input for Filter -> Stream<T> is going to take Filter<T>.
@@ -73,8 +74,27 @@ public class StreamJava8Demo {
 		 */
 		
 		/*
+		 * Flat map 
+		 * 
+		 * Let us have the following list if we want to multiple 
+		 * each element from each list with 2 and store that list 
+		 * in a single list. 
+		 * We have two steps to get the results 
+		 * Flaten the lists and put all in a single list
+		 * multiply each element by 2
+		 * This can be very be done by a flatmap.
+		 * 
+		 * 
 		 * 
 		 */
+		
+		List<List<Integer>> listNumbers = Arrays.asList(Arrays.asList(1,2,3),Arrays.asList(4,5,6,7));
+		
+		listNumbers.stream()
+					.flatMap(List::stream)
+					.map(p->p*2)
+					.forEach(System.out::println);
+					
 		
 		/*
 		 * The objective is to put the results of the computation to a list 

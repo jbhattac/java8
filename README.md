@@ -162,6 +162,39 @@ In java 8 java.util.stream.Stream is the most interesting class that has been ad
 
 1. filter(Predicate<? super T> predicate) -> Blocks some data of the stream and let others flow through. It returns a stream consisting of the elements of this stream that match the given predicate . So number of elements in the  output <= number of elements in input stream.Also note this is type of intermediate transformations that takes place in the stream pipeline.
 
-2.  map (Function<? super T,? extends R> mapper)-> Transforms values from one stream to other by applying the provided function , so the number of elements in the  output stream must match with the input. Also note this is type of intermediate transformations that takes place in the stream pipeline.
+2.  map(Function<? super T,? extends R> mapper)-> Transforms values from one stream to other by applying the provided function , so the number of elements in the  output stream must match with the input. Also note this is type of intermediate transformations that takes place in the stream pipeline.
+
+3. Flatmap Function<? super T,? extends Stream<? extends R>> -> Lets us work with complex set of data structures of type List<List<Integer>> and for example we want to multiply by 2 with all the elements from all the list. If we want to use map  then we have to use a nested map to achive that , however flatmap simplifies that and we can work directly with the elements from all the list the unwrapping is autometically taken care of. 
+
+		List<List<Integer>> listNumbers = 		Arrays.asList(Arrays.asList(1,2,3),Arrays.asList(4,5,6,7));
+		
+		listNumbers.stream()
+					.flatMap(List::stream)
+					.map(p->p*2)
+					.forEach(System.out::println);
+
+4 Reduce (T identity, BinaryOperator<T> accumulator) - >  Performs a reduction on the elements of this stream, using the provided identity value and an associative accumulation function, and returns the reduced value. 
+Sum, min, max, average, and string concatenation are all special cases of reduction. Summing a stream of numbers can be expressed as
+
+		
+     Integer sum = integers.reduce(0, (a, b) -> a+b);
+ 
+
+or:
 
 
+     Integer sum = integers.reduce(0, Integer::sum);
+ 
+
+
+		 * 			Filter       Map		Reduce
+		 * 										0		 * 										0
+		 * X1        |							|
+		 * 
+		 * X2		 ->			  x2'		-> x2'+ 0
+		 * 										|
+		 * X3        |							|
+		 * 										|
+		 * X4        ->	          x4'		->x4'+(x2'+0)	
+		 * 
+5 Collect -> Performs a reduction but on a mutable result set .
