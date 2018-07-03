@@ -34,7 +34,7 @@ public class StreamJava8Demo {
 		
 		// streams in java - 8 using method referance, and other filters.
 		people.stream().filter(p->p.getFirstName().startsWith("J")).forEach(System.out::println);
-		
+		// function composition or a pipeline .
 		numbers.stream()
 		.filter(i->i%2==0)
 		.map(i->i*2)

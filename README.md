@@ -173,9 +173,14 @@ In java 8 java.util.stream.Stream is the most interesting class that has been ad
 					.map(p->p*2)
 					.forEach(System.out::println);
 
-4 Reduce (T identity, BinaryOperator<T> accumulator) - >  Performs a reduction on the elements of this stream, using the provided identity value and an associative accumulation function, and returns the reduced value. 
+4 Reduce (T identity, BinaryOperator<T> accumulator) - >  This is different from map or filter in the sense that it cuts across swim lanes, and looks for elements left or right. Thus this forms an accumulations of the elements of the stream, so it may transform a stream to a single value.This is a terminal operations.Performs a reduction on the elements of this stream, using the provided identity value and an associative accumulation function, and returns the reduced value. 
 Sum, min, max, average, and string concatenation are all special cases of reduction. Summing a stream of numbers can be expressed as
 
+
+		numbers.stream()
+		.filter(i->i%2==0)
+		.map(i->i*2)
+		.reduce(0,Integer::sum);
 		
      Integer sum = integers.reduce(0, (a, b) -> a+b);
  
@@ -188,13 +193,44 @@ or:
 
 
 		 * 			Filter       Map		Reduce
-		 * 										0		 * 										0
-		 * X1        |							|
-		 * 
+		 * 												 								
+		 * X1        |							
+		 * -------------------------
 		 * X2		 ->			  x2'		-> x2'+ 0
-		 * 										|
+		 *------------------------- 										
 		 * X3        |							|
-		 * 										|
-		 * X4        ->	          x4'		->x4'+(x2'+0)	
-		 * 
-5 Collect -> Performs a reduction but on a mutable result set .
+		 * ------------------------								
+		 * X4        ->	      x4'		->x4'+(x2'+0)	
+		 * -------------------------
+Shared mutability problem
+
+		List<Integer> list = new ArrayList<>();
+		
+			numbers.stream()
+			   .filter(i->i%2==0)
+			   .map(i->i*2)
+			   .forEach(i->list.add(i));
+			   
+This code is devil's work, Since we are changing the arraylist and we are doing this on a stream  which can be run in parallel and shared mutability is bad which may give rise to concurrency problems.
+
+6. Collect -> Instead of shared mutability we could do something like this, the collect function will take care of threading automatically . The collect is also a reduce function . 
+
+	List<Integer> list1 = numbers.stream()
+				   .filter(i->i%2==0)
+				   .map(i->i*2)
+				   .collect(Collectors.toList());
+7. toList,toSet,toMap -> transforms a stream to a list or to a set as needed.
+
+	Map<String,Person> map = people.stream()
+				       .collect(Collectors
+				       .toMap(p->p.getFirstName(),p->p));
+8. Mapping and Grouping
+				       
+We can also do groupings and mappings of object . For example we want to create a map where the key is the name  and the value is the person objects who has the name same as the key.
+
+		Map<String, List<String>> groupMap = people.stream()
+											.collect(
+								Collectors.groupingBy(Person::getFirstName,
+								Collectors.mapping(Person::getLastName,
+								Collectors.toList())));
+		
