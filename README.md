@@ -21,13 +21,14 @@ In java 8 single abstract method interface was described formally with @Function
 
 In Java 8 java.util.function defines a host of functional interfaces for supporting a host of lambdas. 
 ### Predicate
-	 Predicates are boolean-valued functions of one argument, they accept one argument and returns boolean.
+	 Predicates are boolean-valued functions of one argument,
+	 they accept one argument and returns boolean.
 ### Function
-	 Represents a function that accepts one argument and produces a result.  
+	Represents a function that accepts one argument and produces a result.  
 ### Supplier
 	Do not  accept any argument but instead returns newly generated values.
 ### Consumer
-	 Accepts a input and performs some operation on that input .
+	Accepts a input and performs some operation on that input .
 
 
 ## Lambdas
@@ -58,15 +59,15 @@ If we take the anonymous class as the starting point , then firstly we remove th
 		
 Now let us analyse a function. Functions typically has 4 things 
 
-1. Name  -> This can be inferred with SAM interfaces being the definitions of lambdas so no need of the method name. 
+1. Name -> This can be inferred with SAM interfaces being the definitions of lambdas so no need of the method name. 
 
 2. Body -> It is the most important part of the function as it describes purpose of the function .
 
-3. parameter list -> This is the operators on which the function acts . This is important and cannot be removed .
+3. parameter list -> This is the operators on which the function acts. This is important and cannot be removed .
 
-4. return Type -> Need not be declared explicitly , can be inferred from the body of the function.
+4. return Type -> Need not be declared explicitly, can be inferred from the body of the function.
 
-If we keep the bare minimum part of this i.e. body and parameter list it is called the lambda expression.Lambda expression have a name and a parameter list.
+If we keep the bare minimum part of this i.e. body and parameter list it is called the lambda expression. Lambda expression have a name and a parameter list.
 
 	Thread t = new Thread(
 		() -> System.out.println("From another thread ");
@@ -75,23 +76,22 @@ If we keep the bare minimum part of this i.e. body and parameter list it is call
 Are lambdas backward compatable.
 
 Lambda in java 8 are backward compatible i.e. we can use lambda even with old api.
-That is why they are backed by single abstract method interfaces which are named as Functional Interfaces. So lambda can be used with any old code like Runnable or callable etc , basically where there is a interface with a single abstract method.
+That is why they are backed by single abstract method interfaces which are named as Functional Interfaces. So lambda can be used with any old code like Runnable or callable, basically where there is a interface with a single abstract method.
 
 Is lambda a syntactical sugar i.e. the compiler changes the lambda to anonymous inner classes as in other languages.
 
-In java that is not true, lambda is implementated as invokedynamic in java which are function pointers. This can be found by using javap. So it consumes much less space in 
-memory and it is much faster.
+In java that is not true, lambda is implementated as invokedynamic in java which are function pointers. This can be found by using javap. So it consumes much less space in memory and it is much faster.
 
 Java can predict the type of the elements passed by the collection types, so it allows 
 type inference, but only for lambda.
 
 () is optional in lambda expression but only for one parameter lambdas.
 
-lambdas should be of one lines,ogic should not be written in lambdas.
+lambdas should be of one lines, logic should not be written in lambdas.
 
 How is the lambdas scope defined.
 
-Accessing outer scope variables from lambda expressions is  similar to anonymous classes. Access for final local variables and  instance and static variables from the  are allowed.
+Accessing outer scope variables from lambda expressions is similar to anonymous classes. Access for final local variables and instance and static variables from the lamdas are allowed.
 
 Access for final variable in the local scope with read access. Implicit final variables are acceptable however the values should not alter.
 In constrast to local variables we have both read and write access to instance
@@ -108,12 +108,13 @@ In a method reference, that contains the method before the :: operator and the n
 
 There are 4 types of method references
 
-1.  Static method reference , we can turn the following lambda to method reference
+1.  Static method reference, we can turn the following lambda to method reference
 
 		(args) -> Class.staticMethod(args)
 		
 		Class::staticMethod
-Instead of the . operator, we use the :: operator, and that we don't pass arguments to the method reference. In this case, any arguments (if any) taken by the method are passed automatically.Where ever we can pass a lambda expression that just calls a static method, we can use a method reference.
+		
+Instead of the . operator, we use the :: operator, and that we don't pass arguments to the method reference. In this case, any arguments (if any) taken by the method are passed automatically. Where ever we can pass a lambda expression that just calls a static method, we can use a method reference.
 
 2. Reference to an Instance Method of a Particular Object
 
